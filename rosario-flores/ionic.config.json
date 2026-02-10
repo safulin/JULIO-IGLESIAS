@@ -1,0 +1,7 @@
+{
+  "name": "rosario-flores",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite"
+}
