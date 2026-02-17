@@ -35,7 +35,7 @@
 
           <div class="profile-header">
             <div class="avatar-wrapper">
-              <img src="https://i.pravatar.cc/300?img=5" alt="Profile" />
+              <img src="https://tse1.explicit.bing.net/th/id/OIP.AIh2ahzFn6a0RmNsxaladwHaE_?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Profile" />
             </div>
           </div>
 
@@ -75,49 +75,56 @@
 </template>
 
 <script setup lang="ts">
+// 11. Importamos los componentes visuales de Ionic
 import { IonPage, IonContent, IonIcon } from '@ionic/vue';
+// 12. Importamos los iconos específicos de la librería Ionicons
 import { 
   personOutline, 
   mailOutline, 
   lockClosedOutline, 
   location,
-  navigateOutline, // Para icono Mapa (triángulo)
-  searchOutline    // Para icono Lista (lupa)
+  navigateOutline, 
+  searchOutline    
 } from 'ionicons/icons';
+// 13. Importamos el enrutador para poder navegar entre páginas
 import { useRouter } from 'vue-router';
 
+// 14. Inicializamos la herramienta del enrutador
 const router = useRouter();
 
+// 15. Función que se ejecuta al hacer clic en el botón rojo
 const logout = () => {
   console.log('Cerrando sesión...');
+  // 16. Redirige al usuario de vuelta a la pantalla de login
   router.push('/login');
 };
 </script>
 
 <style scoped>
-/* Layout General */
+/* 17. Fondo general de la página completa */
 .main-content {
-  --background: #1A3C54; /* Mismo azul que el Login */
+  --background: #1A3C54; 
 }
 
+/* 18. Activa Flexbox para poner la barra lateral a la izquierda del contenido */
 .page-layout {
   display: flex;
   height: 100%;
   width: 100%;
 }
 
-/* --- ESTILOS BARRA LATERAL --- */
+/* 19. Diseño estructural de la barra lateral oscura */
 .sidebar {
   width: 80px;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: 20px;
-  border-right: 1px solid rgba(255,255,255,0.1); /* Separador sutil opcional */
+  border-right: 1px solid rgba(255,255,255,0.1); 
 }
 
+/* 20. Estilos geométricos para simular el logo en forma de gota/pin */
 .mini-logo {
-  /* Simulación del logo pin pequeño */
   width: 40px;
   height: 40px;
   background: rgba(255,255,255,0.2);
@@ -136,6 +143,7 @@ const logout = () => {
   font-size: 20px;
 }
 
+/* 21. Contenedor general que agrupa los botones del menú */
 .nav-items {
   display: flex;
   flex-direction: column;
@@ -143,6 +151,7 @@ const logout = () => {
   width: 100%;
 }
 
+/* 22. Estilo individual de cada botón del menú lateral */
 .nav-item {
   display: flex;
   flex-direction: column;
@@ -157,15 +166,16 @@ const logout = () => {
   font-size: 28px;
 }
 
+/* 23. Resalta en blanco brillante la página en la que estamos */
 .nav-item.active {
   color: white;
   font-weight: bold;
 }
 
-/* --- ESTILOS CONTENIDO PRINCIPAL --- */
+/* 24. Diseño de la zona derecha central donde van los datos */
 .profile-container {
   flex: 1;
-  position: relative; /* Para posicionar el botón logout */
+  position: relative; 
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -173,12 +183,12 @@ const logout = () => {
   color: white;
 }
 
-/* Botón Cerrar Sesión */
+/* 25. Ubica y pinta de rojo el botón de cerrar sesión */
 .btn-logout {
   position: absolute;
   top: 20px;
   right: 20px;
-  background-color: #990000; /* Rojo oscuro */
+  background-color: #990000; 
   color: black;
   font-weight: bold;
   font-size: 10px;
@@ -188,18 +198,19 @@ const logout = () => {
   box-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
-/* Header Avatar */
+/* 26. Da espacio vertical a la foto de perfil */
 .profile-header {
   margin-top: 20px;
   margin-bottom: 60px;
 }
 
+/* 27. Crea un círculo perfecto que recorta la imagen de perfil */
 .avatar-wrapper {
   width: 120px;
   height: 120px;
   border-radius: 50%;
   overflow: hidden;
-  border: 4px solid rgba(255,255,255,0.2); /* Borde decorativo opcional */
+  border: 4px solid rgba(255,255,255,0.2); 
 }
 
 .avatar-wrapper img {
@@ -208,7 +219,7 @@ const logout = () => {
   object-fit: cover;
 }
 
-/* Inputs de Información */
+/* 28. Agrupa y centra los recuadros de información del usuario */
 .info-section {
   width: 100%;
   max-width: 450px;
@@ -217,6 +228,7 @@ const logout = () => {
   gap: 20px;
 }
 
+/* 29. Dibuja el borde fino blanco alrededor de cada dato */
 .info-row {
   display: flex;
   align-items: center;
@@ -231,6 +243,7 @@ const logout = () => {
   color: rgba(255, 255, 255, 0.8);
 }
 
+/* 30. Limpia el estilo nativo de HTML para que el texto parezca flotar transparente */
 .info-row input {
   background: transparent;
   border: none;
@@ -245,12 +258,12 @@ const logout = () => {
   text-align: center;
 }
 
-/* Links Footer */
+/* 31. Posiciona los enlaces finales en la parte inferior izquierda de su zona */
 .footer-links {
   margin-top: 50px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* Alineados a la izquierda del contenedor imaginario */
+  align-items: flex-start; 
   width: 100%;
   max-width: 450px;
   gap: 10px;

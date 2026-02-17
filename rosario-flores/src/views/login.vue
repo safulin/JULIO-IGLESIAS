@@ -5,7 +5,7 @@
         
         <div class="header-section">
           <div class="logo-placeholder">
-            <ion-icon :icon="location" class="pin-icon"></ion-icon>
+                 <img class="brand-logo" src="@/img/logo.png" alt="Logo" />
           </div>
           <p class="welcome-text">BIENVENIDO</p>
         </div>
@@ -77,9 +77,9 @@ const goToRegister = () => {
 </script>
 
 <style scoped>
-/* 1. Fondo general */
+
 .login-content {
-  --background: #1A3C54; /* Color exacto azul oscuro */
+  --background: #1A3C54; 
 }
 
 .login-container {
@@ -98,19 +98,7 @@ const goToRegister = () => {
   margin-bottom: 50px;
 }
 
-.logo-placeholder {
-  /* Placeholder circular/pin similar a la imagen */
-  width: 90px;
-  height: 90px;
-  background: white;
-  border-radius: 50% 50% 50% 0;
-  transform: rotate(-45deg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 20px;
-  box-shadow: 0 0 0 6px rgba(255,255,255,0.2); /* Efecto de ondas */
-}
+
 
 .pin-icon {
   transform: rotate(45deg);
@@ -124,6 +112,10 @@ const goToRegister = () => {
   margin-top: 30px;
   opacity: 0.8;
   font-weight: 300;
+}
+.brand-logo{
+  width: 16em;
+  max-width: 16em;
 }
 
 /* 3. Estilos de Inputs (Custom CSS para border fino) */
@@ -192,7 +184,7 @@ const goToRegister = () => {
   --border-radius: 2px;
   --border-width: 1px;
   height: 45px;
-  width: 60%; /* Más estrecho como en la imagen */
+  width: 60%; 
   align-self: center;
   font-size: 13px;
   letter-spacing: 1px;

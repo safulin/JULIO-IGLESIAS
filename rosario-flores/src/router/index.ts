@@ -1,10 +1,10 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router';
 import { RouteRecordRaw } from 'vue-router';
 
-// Importación de Vistas
 import HomePage from '../views/HomePage.vue';
 import Login from '../views/Login.vue';
 import Profile from '../views/Profile.vue'; 
+import Detalles from '../views/Detalles.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -12,19 +12,24 @@ const routes: Array<RouteRecordRaw> = [
     redirect: '/login'
   },
   {
-    path: '/login' ,
-    name: 'Login',
-    component: Login
-  },
-  {
     path: '/home',
     name: 'Home',
     component: HomePage
   },
   {
+    path: '/login',
+    name: 'Login',
+    component: Login
+  },
+  {
     path: '/profile',
     name: 'Profile',
     component: Profile
+  },
+  {
+    path: '/detalles',
+    name: 'Detalles',
+    component: Detalles
   }
 ]
 
