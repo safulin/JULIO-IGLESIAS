@@ -102,6 +102,8 @@ import Sidebar from '@/components/Sidebar.vue';
   --padding-end: 8px;
 }
 
+
+
 .search {
   flex: 1;
   --background: rgba(0, 0, 0, 0.18);
@@ -123,6 +125,7 @@ import Sidebar from '@/components/Sidebar.vue';
 .fab {
   margin: 0 0 18px 18px;
 }
+
 
 /* Zoom mock (decorativo) */
 .zoom-mock {

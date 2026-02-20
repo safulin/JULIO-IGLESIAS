@@ -43,8 +43,8 @@
               </p>
             </div>
 
-            <button class="btn-contact">
-              CONTACTANOS
+            <button class="btn-contact" @click="$router.push('/formulario')">
+            CONTACTANOS
             </button>
 
           </div>

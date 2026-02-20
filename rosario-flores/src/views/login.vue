@@ -54,21 +54,21 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { IonPage, IonContent, IonButton, IonIcon } from '@ionic/vue';
-import { personOutline, lockClosedOutline, location } from 'ionicons/icons';
+// 1. Hemos quitado 'location' porque ahora usas tu propia imagen
+import { personOutline, lockClosedOutline } from 'ionicons/icons';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
 
-// Variables reactivas para el formulario
 const credentials = ref({
   username: '',
   password: ''
 });
 
-// Funciones de acción
 const doLogin = () => {
   console.log('Login con:', credentials.value);
-  // router.push('/home'); // Descomentar para navegar
+  // 2. Descomentado para que el botón te lleve al mapa
+  router.push('/home'); 
 };
 
 const goToRegister = () => {
@@ -77,7 +77,6 @@ const goToRegister = () => {
 </script>
 
 <style scoped>
-
 .login-content {
   --background: #1A3C54; 
 }
@@ -92,18 +91,9 @@ const goToRegister = () => {
   color: white;
 }
 
-/* 2. Logo */
 .header-section {
   text-align: center;
   margin-bottom: 50px;
-}
-
-
-
-.pin-icon {
-  transform: rotate(45deg);
-  font-size: 40px;
-  color: #1A3C54;
 }
 
 .welcome-text {
@@ -113,12 +103,12 @@ const goToRegister = () => {
   opacity: 0.8;
   font-weight: 300;
 }
+
 .brand-logo{
   width: 16em;
   max-width: 16em;
 }
 
-/* 3. Estilos de Inputs (Custom CSS para border fino) */
 .form-section {
   width: 100%;
   max-width: 350px;
@@ -160,7 +150,6 @@ const goToRegister = () => {
   text-transform: uppercase;
 }
 
-/* 4. Botones */
 .action-buttons {
   display: flex;
   flex-direction: column;
@@ -190,7 +179,6 @@ const goToRegister = () => {
   letter-spacing: 1px;
 }
 
-/* 5. Footer */
 .footer {
   margin-top: auto;
   padding-top: 40px;
