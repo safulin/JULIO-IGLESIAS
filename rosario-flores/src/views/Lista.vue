@@ -99,7 +99,7 @@ const getImagen = (n: number) => {
 </script>
 
 <style scoped>
-/* Los estilos se mantienen limpios y humanos como en la versión anterior */
+
 .main-content { --background: #1A3C54; }
 .page-layout { display: flex; height: 100vh; background-color: #1A3C54; }
 
