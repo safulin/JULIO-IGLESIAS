@@ -105,7 +105,7 @@ const logout = () => {
 
 /*  RESPONSIVE  */
 .mobile-only { 
-  display: none !important; /* Oculto en PC por defecto */
+  display: none !important; /*Oculto en PC por defecto */
 }
 
 .header-branding {
