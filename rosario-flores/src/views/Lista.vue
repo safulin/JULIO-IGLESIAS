@@ -25,12 +25,14 @@
 
           <div class="cards-scroll">
             <div v-for="n in 10" :key="n" class="church-card" @click="goDetails">
+              
               <div class="card-img">
-                <img :src="getImagen(n)" alt="Iglesia" />
+                <img :src="getImagen()" alt="Iglesia" />
               </div>
               
               <div class="card-info">
                 <h3 class="church-name">{{ getNombre(n) }}</h3>
+                
                 <div class="stats-row">
                   <div class="rating">
                     <div class="stars">
@@ -39,6 +41,7 @@
                     </div>
                     <span class="score-text">(4.7)</span>
                   </div>
+
                   <div class="meta-data">
                     <div class="distance">
                       <ion-icon :icon="locationOutline" /> 
@@ -51,6 +54,7 @@
                   </div>
                 </div>
               </div>
+
             </div>
           </div>
         </main>
@@ -69,51 +73,40 @@ import { IonPage, IonContent, IonSearchbar, IonButton, IonIcon } from '@ionic/vu
 import { optionsOutline, star, starOutline, locationOutline } from 'ionicons/icons';
 import { useRouter } from 'vue-router';
 
-// Componentes
 import Sidebar from '@/components/Sidebar.vue';
 import FiltroHome from '@/components/FiltroHome.vue';
 import ListaPopup from '@/components/ListaPopup.vue';
 
 const router = useRouter();
 
-// Estados para los popups
 const isFilterOpen = ref(false);
 const isListPopupOpen = ref(false);
 
 const goDetails = () => router.push('/detalles');
 
-// Funciones auxiliares para datos de prueba
 const getNombre = (n: number) => {
   const nombres = ["PARRÒQUIA DE LA VERGE DE NÚRIA", "PARRÒQUIA DE SANT GAIETÀ", "ESGLÉSIA DE LA VERGE DEL PILAR"];
   return nombres[n % 3];
 };
 
-const getImagen = (n: number) => {
-  const fotos = [
-    "https://tse2.mm.bing.net/th/id/OIG2.OaD2m_.yI15Yk2f4A08t",
-    "https://media-cdn.tripadvisor.com/media/photo-s/0d/17/74/77/parroquia-de-sant-gaieta.jpg",
-    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/49/09/f3/iglesia-de-la-virgen-del.jpg?w=1200&h=-1&s=1"
-  ];
-  return fotos[n % 3];
+// Ahora todas las iglesias devuelven el mismo link
+const getImagen = () => {
+  return "https://imgs.search.brave.com/6oriTdT6E6WrKJUrbn2__sfyNlwHoo0Q-lSYgeNyV2k/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/Y3JlYXRlLnZpc3Rh/LmNvbS9hcGkvbWVk/aWEvc21hbGwvMTY1/NDE2NDQ0L3N0b2Nr/LXBob3RvLXBhcm9j/aGlhbC1jaHVyY2gt/b2Ytc2FuLXZpY2Vu/dGUtbWFydGlyLWFu/ZC1zYW4tc2ViYXN0/aWFuLWZyaWFzLWJ1/cmdvcw";
 };
 </script>
 
 <style scoped>
-
+/*   estilos  */
 .main-content { --background: #1A3C54; }
 .page-layout { display: flex; height: 100vh; background-color: #1A3C54; }
-
 .list-viewer { flex: 1; display: flex; flex-direction: column; padding: 40px; overflow: hidden; }
 
-/* FIX LOGO */
 .mobile-only { display: none !important; }
 
-/* HEADER */
 .search-section { display: flex; align-items: center; gap: 15px; width: 100%; max-width: 900px; margin: 0 auto 30px auto; }
 .filter-btn { --color: white; font-size: 24px; }
 .custom-search { flex: 1; --background: rgba(255, 255, 255, 0.05); --color: white; --border-radius: 8px; cursor: pointer; }
 
-/* LISTA */
 .cards-scroll { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 20px; max-width: 900px; width: 100%; margin: 0 auto; }
 .church-card { display: flex; gap: 20px; background: rgba(255, 255, 255, 0.03); padding: 15px; border-radius: 12px; cursor: pointer; transition: background 0.2s; }
 .church-card:hover { background: rgba(255, 255, 255, 0.06); }
@@ -137,7 +130,6 @@ const getImagen = (n: number) => {
 .is-open { background: #42d77d; box-shadow: 0 0 8px #42d77d66; }
 .is-closed { background: #e04055; box-shadow: 0 0 8px #e0405566; }
 
-/* RESPONSIVE */
 @media (max-width: 768px) {
   .page-layout { flex-direction: column; }
   .mobile-only { display: flex !important; justify-content: center; padding: 15px 0; }
