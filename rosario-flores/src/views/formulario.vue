@@ -1,36 +1,49 @@
 <template>
   <ion-page>
-    <ion-content class="main-content">
+    <ion-content class="main-content" :fullscreen="true">
       <div class="page-layout">
         
         <Sidebar tabActiva="lista" />
 
-        <main class="form-container">
-          <div class="content-wrapper">
+        <main class="form-scroll-area">
+          
+          <header class="mobile-header mobile-only">
+            <img src="@/img/logo2.png" class="brand-logo-mini" />
+          </header>
+
+          <div class="form-card">
             
-            <h1 class="page-title">FORMULARIO</h1>
-            <h2 class="church-subtitle">PARRÒQUIA DE LA VERGE DE NÚRIA</h2>
+            <div class="church-image">
+              <img src="@/img/iglesia.png" alt="Parroquia" />
+            </div>
 
-            <form class="contact-form" @submit.prevent="enviarFormulario">
+            <div class="titles">
+              <h1 class="main-title">FORMULARIO</h1>
+              <p class="sub-title">PARRÒQUIA DE LA VERGE DE NÚRIA</p>
+            </div>
+
+            <form class="actual-form" @submit.prevent="enviarFormulario">
               
-              <div class="input-group">
+              <div class="input-field">
                 <label>NOMBRE</label>
-                <input type="text" v-model="formData.nombre" required />
+                <input v-model="formData.nombre" type="text" placeholder="Tu nombre..." required />
               </div>
 
-              <div class="input-group">
+              <div class="input-field">
                 <label>CORREO</label>
-                <input type="email" v-model="formData.correo" required />
+                <input v-model="formData.correo" type="email" placeholder="ejemplo@correo.com" required />
               </div>
 
-              <div class="input-group">
+              <div class="input-field">
                 <label>MOTIVO</label>
-                <textarea v-model="formData.motivo" rows="8" required></textarea>
+                <textarea v-model="formData.motivo" rows="4" placeholder="¿En qué podemos ayudarte?" required></textarea>
               </div>
 
-              <button type="submit" class="btn-submit">
-                ENVIAR
-              </button>
+              <div class="button-wrapper">
+                <button type="submit" class="btn-send">
+                  ENVIAR MENSAJE
+                </button>
+              </div>
 
             </form>
 
@@ -46,12 +59,10 @@
 import { ref } from 'vue';
 import { IonPage, IonContent } from '@ionic/vue';
 import { useRouter } from 'vue-router';
-// Importamos la barra lateral
 import Sidebar from '@/components/Sidebar.vue'; 
 
 const router = useRouter();
 
-// Variables para guardar lo que el usuario escribe
 const formData = ref({
   nombre: '',
   correo: '',
@@ -59,126 +70,151 @@ const formData = ref({
 });
 
 const enviarFormulario = () => {
-  console.log('Enviando datos:', formData.value);
-  // Aquí puedes añadir después la lógica para enviarlo a una base de datos
-  // router.push('/detalles'); // Descomenta esto si quieres que al enviar vuelva a la iglesia
+  router.push('/agradecimiento');
 };
 </script>
 
 <style scoped>
-/* Layout Principal */
-.main-content { 
-  --background: #1A3C54; 
-}
+.main-content { --background: #1A3C54; }
 
 .page-layout { 
   display: flex; 
-  height: 100%; 
-  width: 100%; 
+  height: 100vh; 
+  background-color: #1A3C54;
 }
 
-/* Diseño del contenedor del formulario */
-.form-container {
+.form-scroll-area {
   flex: 1;
   display: flex;
-  justify-content: center;
-  padding: 60px 20px;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
   color: white;
   overflow-y: auto;
 }
 
-.content-wrapper {
+/* --- FIX LOGO PC --- */
+.mobile-only { 
+  display: none !important; 
+}
+
+/* --- CONTENEDOR FORMULARIO --- */
+.form-card {
   width: 100%;
   max-width: 500px;
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
-/* Títulos */
-.page-title {
-  font-size: 16px;
-  font-weight: 300;
-  letter-spacing: 1px;
+.church-image {
+  width: 100%;
+  height: 200px;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.church-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.titles {
+  text-align: center;
   margin-bottom: 30px;
 }
 
-.church-subtitle {
-  font-size: 14px;
-  font-weight: 300;
-  margin-bottom: 50px;
-  text-align: center;
+.main-title {
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  margin-bottom: 5px;
 }
 
-/* Formulario */
-.contact-form {
-  width: 100%;
+.sub-title {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* --- CAMPOS --- */
+.actual-form {
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: 20px;
 }
 
-.input-group {
+.input-field {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 
-.input-group label {
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.8);
+.input-field label {
+  font-size: 11px;
+  font-weight: 700;
   letter-spacing: 1px;
-  text-transform: uppercase;
 }
 
-.input-group input,
-.input-group textarea {
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  border-radius: 2px;
+.input-field input, 
+.input-field textarea {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
   color: white;
   padding: 12px 15px;
   font-size: 14px;
   outline: none;
-  transition: border-color 0.3s;
-  font-family: inherit;
 }
 
-.input-group input:focus,
-.input-group textarea:focus {
-  border-color: #ffffff;
-  background: rgba(255, 255, 255, 0.02);
+.input-field input:focus, 
+.input-field textarea:focus {
+  border-color: rgba(255, 255, 255, 0.5);
 }
 
-.input-group textarea {
-  resize: vertical; /* Permite estirar la caja hacia abajo si escriben mucho */
+.button-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
 }
 
-/* Botón Enviar */
-.btn-submit {
+.btn-send {
   background-color: white;
-  color: black;
-  font-weight: bold;
-  font-size: 14px;
-  border: none;
-  padding: 15px 40px;
-  margin-top: 30px;
+  color: #1A3C54;
+  font-weight: 800;
+  font-size: 13px;
+  padding: 16px 40px;
+  border-radius: 8px;
   cursor: pointer;
-  letter-spacing: 1px;
-  border-radius: 2px;
-  width: 200px;
-  align-self: center; /* Centra el botón dentro del formulario */
+  letter-spacing: 1.5px;
+  border: none;
+  width: 100%;
 }
 
-/* Modo Móvil */
+/* --- RESPONSIVE --- */
 @media (max-width: 768px) {
-  .page-layout {
-    flex-direction: column; 
-  }
+  .page-layout { flex-direction: column; }
   
-  .form-container {
-    order: 1; 
-    padding: 30px 15px;
+  .mobile-only { 
+    display: flex !important; 
+    justify-content: center;
+    padding: 15px 0 10px 0;
   }
+
+  /* Logo tamaño normal */
+  .brand-logo-mini {
+    width: 60px !important;
+    height: auto;
+  }
+
+  .form-scroll-area { 
+    padding: 15px; 
+    height: calc(100vh - 70px); 
+    justify-content: flex-start;
+  }
+
+  .church-image { height: 160px; }
+  .form-card { padding-bottom: 100px; }
 }
 </style>

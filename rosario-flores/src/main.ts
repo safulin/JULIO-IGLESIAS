@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router';
-
+import './theme/variables.css'
 import { IonicVue } from '@ionic/vue';
 
 /* Core CSS required for Ionic components to work properly */
@@ -41,3 +41,5 @@ const app = createApp(App)
 router.isReady().then(() => {
   app.mount('#app');
 });
+import './theme/tailwind.css'
+import './theme/variables.css'

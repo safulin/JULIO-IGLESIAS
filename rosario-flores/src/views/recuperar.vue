@@ -7,43 +7,30 @@
           <div class="logo-placeholder">
             <img class="brand-logo" src="@/img/logo.png" alt="Logo" />
           </div>
-          <p class="welcome-text">BIENVENIDO</p>
+          <p class="welcome-text">RECUPERA LA CONTRASEÑA</p>
         </div>
 
         <div class="form-section">
           
           <div class="custom-input">
-            <ion-icon :icon="personOutline" class="input-icon"></ion-icon>
+            <ion-icon :icon="mailOutline" class="input-icon"></ion-icon>
             <input 
-              v-model="credentials.username"
-              type="text" 
-              placeholder="USUARIO" 
-            />
-          </div>
-
-          <div class="custom-input">
-            <ion-icon :icon="lockClosedOutline" class="input-icon"></ion-icon>
-            <input 
-              v-model="credentials.password"
-              type="password" 
-              placeholder="CONTRASEÑA" 
+              v-model="recoveryEmail"
+              type="email" 
+              placeholder="CORREO" 
             />
           </div>
 
           <div class="action-buttons">
-            <ion-button expand="block" class="btn-primary" @click="doLogin">
-              ACCEDER
+            <ion-button expand="block" class="btn-primary" @click="router.push('/recuperada')">
+            ENVIAR CORREO DE RECUPERACIÓN
             </ion-button>
-
-            <ion-button fill="outline" class="btn-secondary" @click="goToRegister">
-              REGISTRARSE
-            </ion-button>
-          </div>
+        </div>
 
         </div>
 
         <div class="footer">
-          <p @click="router.push('/recuperar')">¿Olvidaste la contraseña?</p>
+          <p @click="goBack">Volver al inicio</p>
         </div>
 
       </div>
@@ -54,23 +41,19 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { IonPage, IonContent, IonButton, IonIcon } from '@ionic/vue';
-import { personOutline, lockClosedOutline } from 'ionicons/icons';
+import { mailOutline } from 'ionicons/icons';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
 
-const credentials = ref({
-  username: '',
-  password: ''
-});
+const recoveryEmail = ref('');
 
-const doLogin = () => {
-  console.log('Login con:', credentials.value);
-  router.push('/home'); 
+const sendRecovery = () => {
+  console.log('Enviando recuperación a:', recoveryEmail.value);
 };
 
-const goToRegister = () => {
-  router.push('/crearcuenta');
+const goBack = () => {
+  router.push('/login');
 };
 </script>
 
@@ -84,33 +67,31 @@ const goToRegister = () => {
 .login-container {
   display: flex;
   flex-direction: column;
-  justify-content: space-between; 
+  justify-content: space-between;
   align-items: center;
-
   height: 100%;
-  padding: 30px 30px 25px 30px; 
+  padding: 30px 30px 25px 30px;
   color: white;
 }
 
-
 .header-section {
   text-align: center;
-  margin-bottom: 30px; 
+  margin-bottom: 30px;
 }
 
 .welcome-text {
   font-size: 12px;
   letter-spacing: 2px;
-  margin-top: 20px; 
+  margin-top: 20px;
   opacity: 0.8;
   font-weight: 300;
+  text-transform: uppercase;
 }
 
-.brand-logo{
+.brand-logo {
   width: 16em;
   max-width: 16em;
 }
-
 
 .form-section {
   width: 100%;
@@ -123,7 +104,7 @@ const goToRegister = () => {
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 4px;
   padding: 12px 15px;
-  margin-bottom: 20px; /* reducido */
+  margin-bottom: 25px;
   transition: 0.3s;
 }
 
@@ -153,11 +134,10 @@ const goToRegister = () => {
   text-transform: uppercase;
 }
 
-
 .action-buttons {
   display: flex;
   flex-direction: column;
-  gap: 12px; /* reducido */
+  gap: 12px;
   margin-top: 5px;
 }
 
@@ -166,26 +146,14 @@ const goToRegister = () => {
   --color: #1A3C54;
   --border-radius: 2px;
   font-weight: 600;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
   height: 50px;
+  font-size: 11px;
   --box-shadow: none;
 }
 
-.btn-secondary {
-  --color: white;
-  --border-color: rgba(255, 255, 255, 0.4);
-  --border-radius: 2px;
-  --border-width: 1px;
-  height: 45px;
-  width: 60%; 
-  align-self: center;
-  font-size: 13px;
-  letter-spacing: 1px;
-}
-
-
 .footer {
-  padding-top: 10px; /* reducido */
+  padding-top: 10px;
 }
 
 .footer p {

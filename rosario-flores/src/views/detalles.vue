@@ -1,51 +1,60 @@
 <template>
   <ion-page>
-    <ion-content class="main-content">
+    <ion-content class="main-content" :fullscreen="true">
       <div class="page-layout">
         
         <Sidebar tabActiva="lista" />
 
-        <main class="details-container">
+        <main class="details-scroll">
+          
+          <header class="mobile-branding mobile-only">
+            <img src="@/img/logo2.png" class="brand-logo" />
+          </header>
+
           <div class="content-wrapper">
             
-            <div class="image-wrapper">
+            <div class="main-image">
               <img src="https://tse2.mm.bing.net/th/id/OIG2.OaD2m_.yI15Yk2f4A08t" alt="Interior Iglesia" />
             </div>
 
-            <h1 class="church-title">PARRÒQUIA DE LA VERGE DE NÚRIA</h1>
+            <h1 class="page-title">PARRÒQUIA DE LA VERGE DE NÚRIA</h1>
 
-            <div class="section-block">
-              <h2 class="section-title">DESCRIPCIÓN</h2>
-              <div class="section-content">
-                <p>IGLESIA CATOLICA</p>
+            <section class="content-block">
+              <h2 class="block-title">DESCRIPCIÓN</h2>
+              <div class="block-text">
+                <p>IGLESIA CATÓLICA</p>
                 <p>ACCESIBLE CON SILLA DE RUEDAS</p>
               </div>
-            </div>
+            </section>
 
-            <div class="section-block">
-              <h2 class="section-title">RESEÑAS</h2>
+            <section class="content-block">
+              <h2 class="block-title">RESEÑAS</h2>
               
-              <div class="rating-row">
-                <div class="stars">
-                  <ion-icon :icon="star" class="star-icon filled"></ion-icon>
-                  <ion-icon :icon="star" class="star-icon filled"></ion-icon>
-                  <ion-icon :icon="star" class="star-icon filled"></ion-icon>
-                  <ion-icon :icon="star" class="star-icon filled"></ion-icon>
-                  <ion-icon :icon="starOutline" class="star-icon empty"></ion-icon>
+              <div class="rating-container">
+                <div class="stars-row">
+                  <ion-icon 
+                    v-for="i in 5" :key="i"
+                    :icon="i <= userRating ? star : starOutline" 
+                    class="star-icon"
+                    :class="{ 'active': i <= userRating }"
+                    @click="userRating = i"
+                  />
                 </div>
-                <span class="rating-score">(4.7)</span>
+                <span class="rating-number">({{ userRating.toFixed(1) }})</span>
               </div>
 
-              <p class="review-text">
-                CELEBRACIÓ 50 ANIVERSARI NOCES DELS PARES, TOT BÉ MALGRAT LA
+              <p class="review-quote">
+                "CELEBRACIÓ 50 ANIVERSARI NOCES DELS PARES, TOT BÉ MALGRAT LA
                 PANDÈMIA. SORPRENENT, UN DIA ENTRE SETMANA A LES 12H DEL
-                MIGDIA GRAN AFLUÈNCIA
+                MIGDIA GRAN AFLUÈNCIA"
               </p>
-            </div>
+            </section>
 
-            <button class="btn-contact" @click="$router.push('/formulario')">
-            CONTACTANOS
-            </button>
+            <footer class="actions">
+              <button class="btn-primary" @click="$router.push('/formulario')">
+                CONTÁCTANOS
+              </button>
+            </footer>
 
           </div>
         </main>
@@ -56,151 +65,147 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue';
 import { IonPage, IonContent, IonIcon } from '@ionic/vue';
 import { star, starOutline } from 'ionicons/icons';
-// Importamos el componente
 import Sidebar from '@/components/Sidebar.vue'; 
+
+const userRating = ref(4);
 </script>
 
 <style scoped>
-/* Layout Principal */
-.main-content { 
-  --background: #1A3C54; 
-}
+.main-content { --background: #1A3C54; }
 
 .page-layout { 
   display: flex; 
-  height: 100%; 
-  width: 100%; 
+  height: 100vh; 
+  background-color: #1A3C54;
 }
 
-/* Diseño de la página de Detalles */
-.details-container {
+.details-scroll {
   flex: 1;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   padding: 40px 20px;
   color: white;
   overflow-y: auto;
 }
 
+/* --- BRANDING --- */
+.mobile-only { display: none !important; }
+
+.mobile-branding {
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.brand-logo { width: 65px; height: auto; }
+
+/* --- CONTENIDO --- */
 .content-wrapper {
   width: 100%;
   max-width: 600px;
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
-.image-wrapper {
+.main-image {
   width: 100%;
   height: 300px;
   margin-bottom: 30px;
+  border-radius: 12px;
+  overflow: hidden;
 }
 
-.image-wrapper img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 4px;
-}
+.main-image img { width: 100%; height: 100%; object-fit: cover; }
 
-.church-title {
-  font-size: 16px;
-  letter-spacing: 1px;
+.page-title {
+  font-size: 20px;
+  font-weight: 800;
   text-align: center;
   margin-bottom: 40px;
-  font-weight: normal;
+  letter-spacing: 1px;
 }
 
-.section-block {
+.content-block {
   width: 100%;
-  margin-bottom: 30px;
+  margin-bottom: 35px;
 }
 
-.section-title {
+.block-title {
   font-size: 14px;
+  font-weight: 700;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 8px;
   margin-bottom: 15px;
-  font-weight: normal;
+  letter-spacing: 1px;
 }
 
-.section-content {
-  padding-left: 20px; 
-}
-
-.section-content p {
+.block-text p {
   margin: 5px 0;
   font-size: 13px;
   color: rgba(255, 255, 255, 0.7);
 }
 
-.rating-row {
+/* --- RATING --- */
+.rating-container {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 12px;
   margin-bottom: 15px;
 }
 
-.stars {
-  display: flex;
-  gap: 5px;
-}
+.stars-row { display: flex; gap: 4px; }
+.star-icon { font-size: 24px; color: rgba(255, 255, 255, 0.2); cursor: pointer; }
+.star-icon.active { color: #FFD700; }
+.rating-number { font-size: 14px; font-weight: 600; }
 
-.star-icon {
-  font-size: 20px;
-}
-
-.star-icon.filled {
-  color: #FFD700; 
-}
-
-.star-icon.empty {
-  color: rgba(255, 255, 255, 0.4);
-}
-
-.rating-score {
-  font-size: 14px;
-}
-
-.review-text {
+.review-quote {
   font-size: 13px;
+  line-height: 1.6;
+  font-style: italic;
   color: rgba(255, 255, 255, 0.6);
-  line-height: 1.5;
-  text-transform: uppercase;
 }
 
-.btn-contact {
-  background-color: white;
-  color: black;
-  font-weight: bold;
-  font-size: 14px;
-  border: none;
-  padding: 15px 40px;
+/* --- BOTÓN --- */
+.actions {
+  display: flex;
+  justify-content: center;
   margin-top: 20px;
+}
+
+.btn-primary {
+  background-color: white;
+  color: #1A3C54;
+  font-weight: 800;
+  font-size: 14px;
+  padding: 18px 0;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 280px;
   cursor: pointer;
   letter-spacing: 1px;
-  border-radius: 2px;
-  width: 200px;
+  border: none;
 }
 
-/* Modo Móvil */
+/* --- RESPONSIVE --- */
 @media (max-width: 768px) {
-  .page-layout {
-    flex-direction: column; 
-  }
+  .page-layout { flex-direction: column; }
   
-  .details-container {
-    order: 1; 
-    padding: 20px 15px;
+  .mobile-only { 
+    display: flex !important; 
+    justify-content: center;
+    padding: 15px 0 10px 0;
   }
-  
-  .image-wrapper {
-    height: 200px;
-    margin-bottom: 20px;
+
+  .details-scroll { 
+    padding: 15px; 
+    height: calc(100vh - 70px); 
+    justify-content: flex-start;
   }
-  
-  .church-title {
-    margin-bottom: 30px;
-  }
+
+  .main-image { height: 220px; }
+  .content-wrapper { padding-bottom: 100px; }
 }
 </style>

@@ -1,278 +1,226 @@
 <template>
   <ion-page>
-    <ion-content class="main-content">
+    <ion-content class="main-content" :scroll-y="true">
       <div class="page-layout">
         
-        <aside class="sidebar">
-          <div class="sidebar-top">
-             <div class="mini-logo">
-              <ion-icon :icon="location" class="logo-icon"></ion-icon>
-            </div>
-          </div>
-
-          <div class="nav-items">
-            <div class="nav-item">
-              <ion-icon :icon="navigateOutline"></ion-icon>
-              <span>MAPA</span>
-            </div>
-            
-            <div class="nav-item">
-              <ion-icon :icon="searchOutline"></ion-icon> <span>LISTA</span>
-            </div>
-
-            <div class="nav-item active">
-              <ion-icon :icon="personOutline"></ion-icon>
-              <span>PERFIL</span>
-            </div>
-          </div>
-        </aside>
+        <Sidebar tabActiva="perfil" />
 
         <main class="profile-container">
-          
-          <button class="btn-logout" @click="logout">
-            CERRAR SESION
-          </button>
+          <header class="header-branding mobile-only">
+            <img src="@/img/logo2.png" class="top-logo brand-img-fix" />
+          </header>
 
-          <div class="profile-header">
-            <div class="avatar-wrapper">
-              <img src="https://tse1.explicit.bing.net/th/id/OIP.AIh2ahzFn6a0RmNsxaladwHaE_?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Profile" />
-            </div>
+          <div class="top-bar-desktop">
+            <button class="btn-logout" @click="logout">
+              CERRAR SESIÓN
+            </button>
           </div>
 
-          <div class="info-section">
+          <div class="content-wrapper">
             
-            <div class="info-row">
-              <ion-icon :icon="personOutline" class="row-icon"></ion-icon>
-              <input type="text" value="ADRIPROGAMER2011" readonly />
+            <div class="profile-header">
+              <div class="avatar-wrapper">
+                <img
+                  src="https://imgs.search.brave.com/HWdLx4ALMf8qoJ5Fuwt-2uz2KnGrVkoYvya7aP7EXHM/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jb250/ZW50LnNlbWFuYS5l/cy9tZWRpby8yMDIz/LzAzL3NlbWFuYS0x/LTQwNS0xMDI0eDU3/Ni5qcGc"
+                  alt="Avatar"
+                  class="avatar-img"
+                />
+              </div>
             </div>
 
-            <div class="info-row">
-              <ion-icon :icon="mailOutline" class="row-icon"></ion-icon>
-              <input type="text" value="DMARTINEZ@ELPUIG.XEILL.NET" readonly />
+            <div class="form-section">
+              <div class="custom-input">
+                <ion-icon :icon="personOutline" class="input-icon" />
+                <input type="text" value="ADRIPROGAMER2011" readonly />
+              </div>
+
+              <div class="custom-input">
+                <ion-icon :icon="mailOutline" class="input-icon" />
+                <input type="email" value="DMARTINEZ@ELPUIG.XEILL.NET" readonly />
+              </div>
+
+              <div class="custom-input">
+                <ion-icon :icon="lockClosedOutline" class="input-icon" />
+                <input type="password" value="DM*********P*********A********U****" readonly />
+              </div>
+
+              <div class="custom-input centered-input">
+                <input type="text" value="07/11/1069AC" readonly />
+              </div>
             </div>
 
-            <div class="info-row">
-              <ion-icon :icon="lockClosedOutline" class="row-icon"></ion-icon>
-              <input type="text" value="DM********P*******A*******U******" readonly />
+            <div class="top-bar-mobile mobile-only">
+              <button class="btn-logout" @click="logout">
+                CERRAR SESIÓN
+              </button>
             </div>
 
-            <div class="info-row centered-text">
-              <input type="text" value="07/11/1069AC" readonly class="text-center"/>
+            <div class="links-section">
+              <p class="link-item">MIS FAVORITOS</p>
+              <p class="link-item">MIS RESEÑAS</p>
+              <p class="link-item">AJUSTES</p>
             </div>
 
           </div>
-
-          <div class="footer-links">
-            <a href="#">MIS FAVORITOS</a>
-            <a href="#">MIS RESEÑAS</a>
-            <a href="#">AJUSTES</a>
-          </div>
-
         </main>
+
       </div>
     </ion-content>
   </ion-page>
 </template>
 
 <script setup lang="ts">
-// 11. Importamos los componentes visuales de Ionic
-import { IonPage, IonContent, IonIcon } from '@ionic/vue';
-// 12. Importamos los iconos específicos de la librería Ionicons
-import { 
-  personOutline, 
-  mailOutline, 
-  lockClosedOutline, 
-  location,
-  navigateOutline, 
-  searchOutline    
-} from 'ionicons/icons';
-// 13. Importamos el enrutador para poder navegar entre páginas
-import { useRouter } from 'vue-router';
+import { IonPage, IonContent, IonIcon } from '@ionic/vue'
+import { personOutline, mailOutline, lockClosedOutline } from 'ionicons/icons'
+import { useRouter } from 'vue-router'
+import Sidebar from '@/components/Sidebar.vue'
 
-// 14. Inicializamos la herramienta del enrutador
-const router = useRouter();
+const router = useRouter()
 
-// 15. Función que se ejecuta al hacer clic en el botón rojo
 const logout = () => {
-  console.log('Cerrando sesión...');
-  // 16. Redirige al usuario de vuelta a la pantalla de login
-  router.push('/login');
-};
+  router.push('/login')
+}
 </script>
 
 <style scoped>
-/* 17. Fondo general de la página completa */
-.main-content {
-  --background: #1A3C54; 
+.main-content { --background: #1A3C54; }
+
+.page-layout { 
+  display: flex; 
+  height: 100vh; 
+  width: 100vw; 
+  background-color: #1A3C54;
 }
 
-/* 18. Activa Flexbox para poner la barra lateral a la izquierda del contenido */
-.page-layout {
-  display: flex;
-  height: 100%;
-  width: 100%;
-}
-
-/* 19. Diseño estructural de la barra lateral oscura */
-.sidebar {
-  width: 80px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 20px;
-  border-right: 1px solid rgba(255,255,255,0.1); 
-}
-
-/* 20. Estilos geométricos para simular el logo en forma de gota/pin */
-.mini-logo {
-  width: 40px;
-  height: 40px;
-  background: rgba(255,255,255,0.2);
-  border-radius: 50% 50% 50% 0;
-  transform: rotate(-45deg);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 60px;
-  box-shadow: 0 0 0 3px rgba(255,255,255,0.1);
-}
-
-.logo-icon {
-  transform: rotate(45deg);
-  color: white;
-  font-size: 20px;
-}
-
-/* 21. Contenedor general que agrupa los botones del menú */
-.nav-items {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-  width: 100%;
-}
-
-/* 22. Estilo individual de cada botón del menú lateral */
-.nav-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: rgba(255,255,255,0.6);
-  cursor: pointer;
-  font-size: 10px;
-  gap: 5px;
-}
-
-.nav-item ion-icon {
-  font-size: 28px;
-}
-
-/* 23. Resalta en blanco brillante la página en la que estamos */
-.nav-item.active {
-  color: white;
-  font-weight: bold;
-}
-
-/* 24. Diseño de la zona derecha central donde van los datos */
 .profile-container {
+  position: relative;
   flex: 1;
-  position: relative; 
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
+  padding: 40px 20px;
   color: white;
+  overflow-y: auto;
 }
 
-/* 25. Ubica y pinta de rojo el botón de cerrar sesión */
-.btn-logout {
+/* --- BRANDING RESPONSIVE (PC y General) --- */
+.mobile-only { 
+  display: none !important; /* Oculto en PC por defecto */
+}
+
+/* OJO: Quitamos el tamaño fijo de aquí para manejarlo en responsive */
+.header-branding {
+  width: 100%;
+  flex-shrink: 0;
+}
+
+/* --- BOTÓN DESKTOP --- */
+.top-bar-desktop {
   position: absolute;
-  top: 20px;
-  right: 20px;
-  background-color: #990000; 
-  color: black;
+  top: 30px;
+  right: 50px;
+}
+
+.btn-logout {
+  background-color: #A30E0E;
+  color: white;
   font-weight: bold;
-  font-size: 10px;
   border: none;
-  padding: 10px 20px;
+  padding: 10px 24px;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  border-radius: 8px;
   cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  transition: opacity 0.2s;
 }
 
-/* 26. Da espacio vertical a la foto de perfil */
-.profile-header {
-  margin-top: 20px;
-  margin-bottom: 60px;
+.btn-logout:active { opacity: 0.8; }
+
+/* CONTENIDO CENTRAL */
+.content-wrapper {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin: auto 0; /* Centrado vertical en PC */
 }
 
-/* 27. Crea un círculo perfecto que recorta la imagen de perfil */
 .avatar-wrapper {
-  width: 120px;
-  height: 120px;
+  width: 140px;
+  height: 140px;
+  margin: 0 auto;
   border-radius: 50%;
   overflow: hidden;
-  border: 4px solid rgba(255,255,255,0.2); 
+  border: 3px solid rgba(255,255,255,0.1);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 
-.avatar-wrapper img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
+.avatar-img { width: 100%; height: 100%; object-fit: cover; }
 
-/* 28. Agrupa y centra los recuadros de información del usuario */
-.info-section {
-  width: 100%;
-  max-width: 450px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
+/* INPUTS */
+.form-section { display: flex; flex-direction: column; gap: 15px; }
 
-/* 29. Dibuja el borde fino blanco alrededor de cada dato */
-.info-row {
+.custom-input {
   display: flex;
   align-items: center;
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  padding: 12px 15px;
-  border-radius: 2px;
+  border: 1px solid rgba(127, 164, 177, 0.4);
+  border-radius: 8px;
+  padding: 14px 16px;
+  background: rgba(255,255,255,0.05);
 }
 
-.row-icon {
-  font-size: 24px;
-  margin-right: 15px;
-  color: rgba(255, 255, 255, 0.8);
-}
+.input-icon { font-size: 18px; margin-right: 14px; color: #7FA4B1; }
+.custom-input input { background: transparent; border: none; outline: none; color: #7FA4B1; flex: 1; font-size: 14px; }
+.centered-input input { text-align: center; }
 
-/* 30. Limpia el estilo nativo de HTML para que el texto parezca flotar transparente */
-.info-row input {
-  background: transparent;
-  border: none;
-  color: white;
-  font-size: 14px;
-  width: 100%;
-  outline: none;
-  letter-spacing: 0.5px;
-}
+/* LINKS */
+.links-section { display: flex; flex-direction: column; gap: 12px; align-items: center; margin-top: 10px; }
+.link-item { font-size: 13px; letter-spacing: 1px; color: rgba(127, 164, 177, 0.8); cursor: pointer; text-transform: uppercase; }
 
-.text-center {
-  text-align: center;
-}
+/* --- 🔥 RESPONSIVE CORREGIDO --- */
+@media (max-width: 768px) {
+  .page-layout { flex-direction: column; }
+  
+  /* Activamos los elementos mobile-only */
+  .mobile-only { 
+    display: flex !important; 
+    justify-content: center;
+    width: 100%;
+  }
 
-/* 31. Posiciona los enlaces finales en la parte inferior izquierda de su zona */
-.footer-links {
-  margin-top: 50px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start; 
-  width: 100%;
-  max-width: 450px;
-  gap: 10px;
-}
+  /* 🔥 EL ARREGLO PARA EL LOGO GIGANTE 🔥 */
+  .header-branding.mobile-only {
+    padding: 15px 0 10px 0; /* Espaciado ajustado */
+    height: auto; /* Dejamos que respire */
+  }
 
-.footer-links a {
-  color: rgba(255,255,255,0.7);
-  text-decoration: none;
-  font-size: 14px;
-  letter-spacing: 1px;
+  .top-logo.brand-img-fix {
+    width: 65px !important; /* 🔥 TAMAÑO FINAL RAZONABLE (Ajusta si quieres) */
+    height: auto;
+    max-width: 65px;
+  }
+
+  /* Ocultamos PC, mostramos Móvil */
+  .top-bar-desktop { display: none !important; }
+  .top-bar-mobile.mobile-only { 
+    margin: 15px 0; 
+  }
+
+  .profile-container { 
+    padding: 15px; 
+    height: calc(100vh - 70px); /* Restamos el sidebar inferior */
+    justify-content: flex-start; /* Todo arriba en móvil */
+  }
+
+  .content-wrapper { 
+    gap: 15px; /* Reducimos el gap para que quepa todo */
+    margin-top: 5px;
+    margin-bottom: 0;
+    padding-bottom: 100px; /* 🔥 Importante para no tapar el menú inferior */
+    height: auto;
+  }
+
+  .avatar-wrapper { width: 110px; height: 110px; }
 }
 </style>

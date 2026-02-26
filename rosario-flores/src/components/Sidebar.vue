@@ -1,157 +1,144 @@
 <template>
-  <aside class="sidebar">
-    <div class="sidebar-top">
-       <div class="mini-logo">
-        <ion-icon :icon="location" class="logo-icon"></ion-icon>
-      </div>
-    </div>
-
-    <div class="nav-items">
-      <div 
-        class="nav-item" 
-        :class="{ active: tabActiva === 'mapa' }" 
-        @click="navegar('/home')"
-      >
-        <ion-icon :icon="navigateOutline"></ion-icon>
-        <span>MAPA</span>
-      </div>
+  <aside class="navigation-bar">
+    <div class="nav-container">
       
-      <div 
-        class="nav-item" 
-        :class="{ active: tabActiva === 'lista' }" 
-        @click="navegar('/detalles')"
-      >
-        <ion-icon :icon="searchOutline"></ion-icon>
-        <span>LISTA</span>
+      <div class="logo-wrapper hide-mobile">
+        <img src="@/img/logo2.png" alt="Logo" class="logo-img" />
       </div>
 
-      <div 
-        class="nav-item" 
-        :class="{ active: tabActiva === 'perfil' }" 
-        @click="navegar('/profile')"
-      >
-        <ion-icon :icon="personOutline"></ion-icon>
-        <span>PERFIL</span>
-      </div>
+      <nav class="nav-menu">
+        <div class="menu-item" :class="{ active: tabActiva === 'mapa' }" @click="router.push('/home')">
+          <ion-icon :icon="navigateOutline" />
+          <span>MAPA</span>
+        </div>
+
+        <div class="menu-item" :class="{ active: tabActiva === 'lista' }" @click="router.push('/lista')">
+          <ion-icon :icon="searchOutline" />
+          <span>LISTA</span>
+        </div>
+
+        <div class="menu-item" :class="{ active: tabActiva === 'perfil' }" @click="router.push('/profile')">
+          <ion-icon :icon="personOutline" />
+          <span>PERFIL</span>
+        </div>
+      </nav>
+      
+      <div class="spacer-bottom hide-mobile"></div>
+      
     </div>
   </aside>
 </template>
 
 <script setup lang="ts">
-import { IonIcon } from '@ionic/vue';
-import { location, navigateOutline, searchOutline, personOutline } from 'ionicons/icons';
 import { useRouter } from 'vue-router';
+import { IonIcon } from '@ionic/vue';
+import { navigateOutline, searchOutline, personOutline } from 'ionicons/icons';
 
-// 4. Recibimos qué pestaña debe estar iluminada desde la página padre
-const props = defineProps({
-  tabActiva: {
-    type: String,
-    required: true
-  }
-});
-
+defineProps<{ tabActiva: string }>();
 const router = useRouter();
-
-// 5. Función para cambiar de página
-const navegar = (ruta: string) => {
-  router.push(ruta);
-};
 </script>
 
 <style scoped>
-/* Pegamos aquí SOLO los estilos de la barra lateral y su responsive */
-.sidebar {
+/* Diseño principal (Escritorio) */
+.navigation-bar {
   width: 80px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 20px;
-  border-right: 1px solid rgba(255,255,255,0.1);
-  flex-shrink: 0;
+  height: 100vh;
   background-color: #1A3C54;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+  z-index: 1000;
 }
 
-.sidebar-top {
+.nav-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 20px 0;
+}
+
+.logo-wrapper {
   display: flex;
   justify-content: center;
-  width: 100%;
+  margin-bottom: 40px;
 }
 
-.mini-logo {
+.logo-img {
   width: 40px;
-  height: 40px;
-  background: rgba(255,255,255,0.2);
-  border-radius: 50% 50% 50% 0;
-  transform: rotate(-45deg);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 60px;
-  box-shadow: 0 0 0 3px rgba(255,255,255,0.1);
+  height: auto;
 }
 
-.logo-icon {
-  transform: rotate(45deg);
-  color: white;
-  font-size: 20px;
-}
-
-.nav-items {
+.nav-menu {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  justify-content: space-around;
+  align-items: center;
+  padding: 40px 0;
+}
+
+.menu-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  transition: color 0.2s ease;
   width: 100%;
 }
 
-.nav-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: rgba(255,255,255,0.6);
-  cursor: pointer;
-  font-size: 10px;
-  gap: 5px;
-  transition: 0.2s;
-}
-
-.nav-item ion-icon {
+.menu-item ion-icon {
   font-size: 28px;
 }
 
-.nav-item.active {
-  color: white;
-  font-weight: bold;
+.menu-item span {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1px;
 }
 
+.menu-item.active {
+  color: #ffffff;
+}
+
+.spacer-bottom {
+  height: 40px;
+}
+
+/* Diseño adaptable (Móvil) */
 @media (max-width: 768px) {
-  .sidebar {
+  .navigation-bar {
     width: 100%;
     height: 70px;
-    flex-direction: row;
+    position: fixed;
+    bottom: 0;
+    left: 0;
     border-right: none;
-    border-top: 1px solid rgba(255,255,255,0.1);
-    padding-top: 0;
-    order: 2;
-    z-index: 10;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 2000;
   }
 
-  .sidebar-top {
-    display: none;
+  .nav-container {
+    padding: 0;
   }
 
-  .nav-items {
+  .hide-mobile {
+    display: none !important;
+  }
+
+  .nav-menu {
     flex-direction: row;
     justify-content: space-around;
-    align-items: center;
-    gap: 0;
+    padding: 0;
     height: 100%;
   }
 
-  .nav-item {
-    gap: 2px;
+  .menu-item {
+    gap: 4px;
+    justify-content: center;
   }
 
-  .nav-item ion-icon {
+  .menu-item ion-icon {
     font-size: 24px;
   }
 }
