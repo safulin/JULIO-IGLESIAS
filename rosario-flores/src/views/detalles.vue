@@ -14,7 +14,10 @@
           <div class="content-wrapper">
             
             <div class="main-image">
-              <img src="https://tse2.mm.bing.net/th/id/OIG2.OaD2m_.yI15Yk2f4A08t" alt="Interior Iglesia" />
+              <img 
+                src="https://imgs.search.brave.com/6oriTdT6E6WrKJUrbn2__sfyNlwHoo0Q-lSYgeNyV2k/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/Y3JlYXRlLnZpc3Rh/LmNvbS9hcGkvbWVk/aWEvc21hbGwvMTY1/NDE2NDQ0L3N0b2Nr/LXBob3RvLXBhcm9j/aGlhbC1jaHVyY2gt/b2Ytc2FuLXZpY2Vu/dGUtbWFydGlyLWFu/ZC1zYW4tc2ViYXN0/aWFuLWZyaWFzLWJ1/cmdvcw" 
+                alt="Iglesia de San Vicente" 
+              />
             </div>
 
             <h1 class="page-title">PARRÒQUIA DE LA VERGE DE NÚRIA</h1>
@@ -74,6 +77,7 @@ const userRating = ref(4);
 </script>
 
 <style scoped>
+/* Estiloss */
 .main-content { --background: #1A3C54; }
 
 .page-layout { 
@@ -92,17 +96,12 @@ const userRating = ref(4);
   overflow-y: auto;
 }
 
-/* --- BRANDING --- */
+/* Visibilidad del logo */
 .mobile-only { display: none !important; }
-
-.mobile-branding {
-  width: 100%;
-  flex-shrink: 0;
-}
-
+.mobile-branding { width: 100%; flex-shrink: 0; }
 .brand-logo { width: 65px; height: auto; }
 
-/* --- CONTENIDO --- */
+/* Contenedor de Contenido */
 .content-wrapper {
   width: 100%;
   max-width: 600px;
@@ -116,6 +115,7 @@ const userRating = ref(4);
   margin-bottom: 30px;
   border-radius: 12px;
   overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 
 .main-image img { width: 100%; height: 100%; object-fit: cover; }
@@ -139,7 +139,6 @@ const userRating = ref(4);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   padding-bottom: 8px;
   margin-bottom: 15px;
-  letter-spacing: 1px;
 }
 
 .block-text p {
@@ -148,14 +147,8 @@ const userRating = ref(4);
   color: rgba(255, 255, 255, 0.7);
 }
 
-/* --- RATING --- */
-.rating-container {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 15px;
-}
-
+/* Sistema de Estrellas */
+.rating-container { display: flex; align-items: center; gap: 12px; margin-bottom: 15px; }
 .stars-row { display: flex; gap: 4px; }
 .star-icon { font-size: 24px; color: rgba(255, 255, 255, 0.2); cursor: pointer; }
 .star-icon.active { color: #FFD700; }
@@ -168,13 +161,7 @@ const userRating = ref(4);
   color: rgba(255, 255, 255, 0.6);
 }
 
-/* --- BOTÓN --- */
-.actions {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-}
-
+/* Botón Principal */
 .btn-primary {
   background-color: white;
   color: #1A3C54;
@@ -185,11 +172,11 @@ const userRating = ref(4);
   width: 100%;
   max-width: 280px;
   cursor: pointer;
-  letter-spacing: 1px;
   border: none;
+  margin: 0 auto;
 }
 
-/* --- RESPONSIVE --- */
+/* Adaptación Móvil */
 @media (max-width: 768px) {
   .page-layout { flex-direction: column; }
   
