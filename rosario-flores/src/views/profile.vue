@@ -103,12 +103,11 @@ const logout = () => {
   overflow-y: auto;
 }
 
-/* --- BRANDING RESPONSIVE (PC y General) --- */
+/*  RESPONSIVE  */
 .mobile-only { 
   display: none !important; /* Oculto en PC por defecto */
 }
 
-/* OJO: Quitamos el tamaño fijo de aquí para manejarlo en responsive */
 .header-branding {
   width: 100%;
   flex-shrink: 0;
@@ -189,14 +188,14 @@ const logout = () => {
     width: 100%;
   }
 
-  /* 🔥 EL ARREGLO PARA EL LOGO GIGANTE 🔥 */
+  /* EL ARREGLO PARA EL LOGO GIGANTE  */
   .header-branding.mobile-only {
     padding: 15px 0 10px 0; /* Espaciado ajustado */
     height: auto; /* Dejamos que respire */
   }
 
   .top-logo.brand-img-fix {
-    width: 65px !important; /* 🔥 TAMAÑO FINAL RAZONABLE (Ajusta si quieres) */
+    width: 65px !important;
     height: auto;
     max-width: 65px;
   }
@@ -209,15 +208,15 @@ const logout = () => {
 
   .profile-container { 
     padding: 15px; 
-    height: calc(100vh - 70px); /* Restamos el sidebar inferior */
-    justify-content: flex-start; /* Todo arriba en móvil */
+    height: calc(100vh - 70px); 
+    justify-content: flex-start;
   }
 
   .content-wrapper { 
-    gap: 15px; /* Reducimos el gap para que quepa todo */
+    gap: 15px; 
     margin-top: 5px;
     margin-bottom: 0;
-    padding-bottom: 100px; /* 🔥 Importante para no tapar el menú inferior */
+    padding-bottom: 100px;
     height: auto;
   }
 
